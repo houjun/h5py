@@ -103,6 +103,7 @@ def open(char* name, unsigned int flags=H5F_ACC_RDWR, PropFAID fapl=None):
 
     Keyword fapl may be a file access property list.
     """
+    print('Using h5py with async HDF5 to open a file')
     return FileID(H5Fopen(name, flags, pdefault(fapl)))
 
 
@@ -123,6 +124,7 @@ def create(char* name, int flags=H5F_ACC_TRUNC, PropFCID fcpl=None,
     To keep the behavior in line with that of Python's built-in functions,
     the default is ACC_TRUNC.  Be careful!
     """
+    print('Using h5py with async HDF5 to create a file')
     return FileID(H5Fcreate(name, flags, pdefault(fcpl), pdefault(fapl)))
 
 IF HDF5_VERSION >= (1, 8, 9):
@@ -338,6 +340,7 @@ cdef class FileID(GroupID):
         physical file might not be closed until all remaining open
         identifiers are freed.
         """
+        print('Using h5py with async HDF5 to close a file')
         self._close()
         _objects.nonlocal_close()
 
